@@ -58,8 +58,7 @@ class BilibiliDynamicDownloader:
 
         # 初始化cookies和headers
         self.cookies = {
-            'buvid3': 'E6DE022D-D8A9-6A9C-49E0-87E3AD097DEF58846infoc',
-            # ... 其他cookies ...
+    'buvid3': 'E6DE022D-D8A9-6A9C-49E0-87E3AD097DEF58846infoc',
         }
 
     def select_path(self):
