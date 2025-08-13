@@ -14,9 +14,10 @@ B站动态下载器是一个基于Python的图形界面工具，用于下载B站
 - 多线程下载，避免界面冻结
 
 ## 运行环境
-
-- Python 3.x
+可以直接运行exe
+如果运行main.py
 - 需要安装以下依赖库：
+  - Python 3.x
   - requests
   - tkinter
   - Pillow (PIL)
@@ -28,10 +29,7 @@ pip install requests pillow
 
 ## 使用方法
 
-1. 运行程序：
-   ```bash
-   python main.py
-   ```
+1. 点击运行exe或终端运行main.py程序
 
 2. 在界面中输入或选择以下信息：
    - UP主ID：要下载动态的UP主的B站用户ID
@@ -45,7 +43,7 @@ pip install requests pillow
 
 ## 注意事项
 
-1. 程序使用了固定的cookies和headers来访问B站API，如果无法获取数据，可能需要更新这些参数。
+1. 程序使用了固定的headers来访问B站API，如果无法获取数据，可能需要更新这些参数。
 2. 下载大量内容时可能会触发B站的访问限制，建议合理设置下载数量。
 3. 图片预览功能可能会因为网络问题而无法显示某些图片，但这不会影响实际下载。
 
