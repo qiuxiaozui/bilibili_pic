@@ -1,3 +1,5 @@
+import random
+
 import requests
 import os
 import tkinter as tk
@@ -58,8 +60,8 @@ class BilibiliDynamicDownloader:
 
         # 初始化cookies和headers
         self.cookies = {
-    'buvid3': 'E6DE022D-D8A9-6A9C-49E0-87E3AD097DEF58846infoc',
-        }
+    'buvid3': str(random.randint(1,999)),
+    }
 
     def select_path(self):
         path = filedialog.askdirectory()
@@ -126,9 +128,10 @@ class BilibiliDynamicDownloader:
 
             if response.status_code != 200:
                 raise Exception(f"请求失败，状态码: {response.status_code}")
-
+            print(response.text)
             data = response.json().get('data')
             if not data:
+                print("没有提取到更多信息")
                 break
 
             items = data.get('items', [])
@@ -257,24 +260,24 @@ class BilibiliDynamicDownloader:
                        '"y":736,"z":2,"timestamp":774,"k":111,"type":0},{"x":1714,"y":24,"z":114,'
                        '"timestamp":875,"k":84,"type":0},{"x":1514,"y":-487,"z":42,"timestamp":1064,"k":96,"type":0},{"x":1734,"y":-313,"z":193,"timestamp":1182,"k":101,"type":0},{"x":2138,"y":103,"z":262,"timestamp":1315,"k":120,"type":0},{"x":2265,"y":226,"z":332,"timestamp":1427,"k":100,"type":0},{"x":2519,"y":481,"z":583,"timestamp":2623,"k":75,"type":0},{"x":2062,"y":194,"z":76,"timestamp":2724,"k":62,"type":0},{"x":2308,"y":791,"z":74,"timestamp":2825,"k":85,"type":0},{"x":2867,"y":1360,"z":626,"timestamp":2926,"k":83,"type":0},{"x":2452,"y":952,"z":213,"timestamp":3026,"k":70,"type":0},{"x":3159,"y":1660,"z":917,"timestamp":3174,"k":86,"type":0},{"x":2923,"y":1671,"z":377,"timestamp":3275,"k":79,"type":0},{"x":3729,"y":1927,"z":993,"timestamp":14049,"k":96,"type":0},{"x":4396,"y":2491,"z":1693,"timestamp":14151,"k":72,"type":0},{"x":3059,"y":1085,"z":287,"timestamp":14254,"k":110,"type":0},{"x":4382,"y":2151,"z":1553,"timestamp":16488,"k":85,"type":0},{"x":4384,"y":1567,"z":1703,"timestamp":16589,"k":112,"type":0},{"x":3297,"y":489,"z":589,"timestamp":16690,"k":78,"type":0},{"x":3944,"y":1266,"z":984,"timestamp":16800,"k":96,"type":0},{"x":2996,"y":673,"z":190,"timestamp":73046,"k":91,"type":0},{"x":3642,"y":1042,"z":1230,"timestamp":73148,"k":75,"type":0},{"x":3722,"y":1085,"z":1329,"timestamp":73250,"k":99,"type":0},{"x":2714,"y":91,"z":325,"timestamp":73351,"k":81,"type":0},{"x":4237,"y":1671,"z":1861,"timestamp":73451,"k":84,"type":0},{"x":4634,"y":2075,"z":2260,"timestamp":73551,"k":117,"type":0},{"x":2697,"y":156,"z":315,"timestamp":73652,"k":75,"type":0},{"x":2706,"y":181,"z":322,"timestamp":73753,"k":64,"type":0},{"x":4153,"y":1630,"z":1763,"timestamp":73855,"k":73,"type":0},{"x":3176,"y":662,"z":782,"timestamp":74174,"k":124,"type":0},{"x":4505,"y":2024,"z":2104,"timestamp":74278,"k":61,"type":0},{"x":5157,"y":2698,"z":2759,"timestamp":74379,"k":95,"type":0},{"x":6084,"y":3632,"z":3688,"timestamp":74575,"k":111,"type":0},{"x":3133,"y":780,"z":762,"timestamp":74677,"k":101,"type":0},{"x":3089,"y":759,"z":718,"timestamp":74770,"k":90,"type":0}]',
         "dm_img_str": "V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ",
-        "dm_cover_img_str": "QU5HTEUgKE5WSURJQSwgTlZJRElBIEdlRm9yY2UgR1RYIDEwNjAgKDB4MDAwMDFDMjApIERpcmVjdDNEMTEgdnNfNV8wIHBzXzVfMCwgRDNEMTEpR29vZ2xlIEluYy4gKE5WSURJQS",
+        "dm_cover_img_str": "U5HTEUgKE5WSURJQSwgTlZJRElBIEdlRm9yY2UgR1RYIDEwNjAgKDB4MDAwMDFDMjApIERpcmVjdDNEMTEgdnNfNV8wIHBzXzVfMCwgRDNEMTEpR29vZ2xlIEluYy4gKE5WSURJQS",
     }
 
     def get_headers(self, host_mid):
         return {
-        'accept': '*/*',
-        'accept-language': 'zh,en;q=0.9,zh-CN;q=0.8,en-GB;q=0.7,en-US;q=0.6',
-        'priority': 'u=1, i',
-        'referer': 'https://space.bilibili.com/'+
-                   host_mid + '/dynamic?spm_id_from=333.1387.list.card_title.click',
-        'sec-ch-ua': '"Chromium";v="130", "Microsoft Edge";v="130", "Not?A_Brand";v="99"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-site',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0',
-    }
+            'accept': '*/*',
+            'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+            'origin': 'https://space.bilibili.com',
+            'priority': 'u=1, i',
+            'referer': f'https://space.bilibili.com/{host_mid}/dynamic',
+            'sec-ch-ua': '"Not;A=Brand";v="99", "Microsoft Edge";v="139", "Chromium";v="139"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0',
+        }
 
 
 if __name__ == '__main__':
